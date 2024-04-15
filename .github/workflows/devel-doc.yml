@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: juliopdx/push-test
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          # token: ${{ secrets.REPO_ACCESS_TOKEN }}
           fetch-depth: 0
           path: ./docs
 
