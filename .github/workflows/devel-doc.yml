@@ -26,10 +26,10 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           # Ninja checkout
-          git remote add avd-docs  https://github.com/juliopdx/push-test
+          git remote add push-test  https://github.com/juliopdx/push-test
           # No clash with branch main
           git remote fetch main
-      - name: 'Build mkdocs content and deploy to aristanetworks/avd-docs on main'
+      - name: 'Build mkdocs content and deploy'
         run: |
             pip install -r requirements.txt
             mike deploy --push -r push-test -b main devel
