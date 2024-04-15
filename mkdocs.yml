@@ -1,0 +1,103 @@
+# Project information
+site_name: Arista AVD
+site_author: Arista Ansible Team
+site_description: Arista Validated Designs documentation
+copyright: Copyright &copy; 2019 - 2023 Arista Networks
+
+# Repository information
+repo_name: AVD on Github
+repo_url: https://github.com/aristanetworks/avd
+
+# Configuration
+use_directory_urls: false
+edit_uri: edit/devel/ansible_collections/arista/avd/
+theme:
+  name: material
+  # custom_dir: ansible_collections/arista/avd/docs/_overrides
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+    - header.autohide
+    - navigation.instant
+    - navigation.top
+    - search.highlight
+    #- toc.integrate
+    - toc.follow
+  highlightjs: true
+  icon:
+    repo: fontawesome/brands/github
+    logo: fontawesome/solid/book
+    edit: fontawesome/solid/file-pen
+  favicon: docs/_media/favicon.ico
+  font:
+    code: Fira Mono
+  language: en
+  include_search_page: false
+  search_index_only: true
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/aristanetworks/avd
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/AristaNetworks
+    - icon: fontawesome/solid/globe
+      link: https://www.arista.com
+  version:
+    provider: mike
+    default: stable
+
+plugins:
+  - search:
+      lang: en
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - mdx_truly_sane_lists
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols:
+      fractions: false
+  - pymdownx.snippets:
+      base_path: 'ansible_collections/arista/avd/'
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - smarty
+  - tables
+  - toc:
+      separator: "-"
+      permalink: true
+
+# TOC
+nav:
+  - Home: README.md

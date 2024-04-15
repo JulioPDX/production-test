@@ -1,0 +1,35 @@
+---
+name: Deploy devel documentation
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  'devel_doc':
+    name: 'Update Public devel documentation'
+    runs-on: ubuntu-latest
+    if: github.repository == 'juliopdx/production-test'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Python 3 on runner'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Setup Git config
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Ninja checkout
+          git remote add avd-docs  https://github.com/juliopdx/push-test
+          # No clash with branch main
+          git remote fetch main
+      - name: 'Build mkdocs content and deploy to aristanetworks/avd-docs on main'
+        run: |
+            pip install -r requirements.txt
+            mike deploy --push -r push-test -b main devel
