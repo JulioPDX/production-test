@@ -18,13 +18,13 @@ jobs:
           fetch-depth: 0
           path: ./devel
 
-      # - name: Checkout docs repo
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: juliopdx/push-test
-      #     token: ${{ secrets.REPO_ACCESS_TOKEN }}
-      #     fetch-depth: 0
-      #     path: ./docs
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+        with:
+          repository: juliopdx/push-test
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          fetch-depth: 0
+          path: ./docs
 
       - name: 'Setup Python 3 on runner'
         uses: actions/setup-python@v5
@@ -33,13 +33,13 @@ jobs:
 
       - name: Setup Git config
         run: |
-          cd ./devel
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote add push-test https://github.com/juliopdx/push-test
+          # git remote add push-test https://github.com/juliopdx/push-test
           # git fetch --all
       - name: 'Build mkdocs content and deploy'
         run: |
-            cd ./devel
-            pip install -r requirements.txt
-            mike deploy --push -r push-test -b main devel
+            ls
+            cd ./docs
+            pip install -r ../devel/requirements.txt
+            mike deploy --push -b main devel --config-file ../devel/mkdocs.yml
