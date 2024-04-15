@@ -41,4 +41,4 @@ jobs:
         run: |
             cd ./devel
             pip install -r requirements.txt
-            mike deploy --push -r push-test -b main devel
+            mike deploy --push -r https://github.com/juliopdx/push-test -b main devel
