@@ -35,5 +35,6 @@ jobs:
       - name: 'Build mkdocs content and deploy'
         run: |
             ls
+            git remote -v
             pip install -r requirements.txt
             mike deploy --push -r push-test -b main devel
