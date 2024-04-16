@@ -3,7 +3,7 @@ name: Deploy devel documentation
 on:
   push:
     branches:
-      - main
+      - devel
   workflow_dispatch:
 
 jobs:
