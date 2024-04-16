@@ -34,8 +34,6 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       - name: 'Build mkdocs content and deploy'
         run: |
-            ls
-            git remote -v
             pip install -r requirements.txt
-            git remote set-url push-test https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/JulioPDX/push-test.git
+            git remote add push-test https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/JulioPDX/push-test.git
             mike deploy --push -r push-test -b main devel
