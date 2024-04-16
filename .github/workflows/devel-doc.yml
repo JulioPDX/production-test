@@ -37,4 +37,5 @@ jobs:
             ls
             git remote -v
             pip install -r requirements.txt
-            mike deploy --push -r https://github.com/JulioPDX/push-test -b main devel
+            git remote set-url push-test https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/JulioPDX/push-test.git
+            mike deploy --push -r push-test -b main devel
