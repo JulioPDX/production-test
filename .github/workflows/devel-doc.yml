@@ -1,10 +1,16 @@
 ---
-name: Deploy devel documentation
+# This is deploying the latest commits on devel to aristanetworks/avd-docs main branch
+name: Deploy devel documentation to aristanetworks/avd-docs main
+
 on:
   push:
     branches:
-      - main
+      - devel
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
 
 jobs:
   'devel_doc':
@@ -12,19 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'juliopdx/production-test'
     steps:
-      - name: Checkout build repo
+      - name: Checkout AVD
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          path: ./devel
-
-      - name: Checkout docs repo
-        uses: actions/checkout@v4
-        with:
-          repository: juliopdx/push-test
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          fetch-depth: 0
-          path: ./docs
 
       - name: 'Setup Python 3 on runner'
         uses: actions/setup-python@v5
@@ -35,9 +32,12 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Ninja checkout
+          git remote add push-test  https://github.com/juliopdx/push-test
+          # No clash with branch main
+          git remote fetch main
+
       - name: 'Build mkdocs content and deploy'
         run: |
-            ls
-            cd ./docs
-            pip install -r ../devel/requirements.txt
-            mike deploy --push -b main devel --config-file ../devel/mkdocs.yml
+            pip install -r requirements.txt
+            mike deploy --push -r push-test -b main devel
