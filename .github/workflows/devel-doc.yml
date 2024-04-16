@@ -10,7 +10,7 @@ jobs:
   'devel_doc':
     name: 'Update Public devel documentation'
     runs-on: ubuntu-latest
-    if: github.repository == 'juliopdx/production-test'
+    if: github.repository == 'JulioPDX/production-test'
     steps:
       - name: Checkout build repo
         uses: actions/checkout@v4
@@ -20,7 +20,7 @@ jobs:
       - name: Checkout docs repo
         uses: actions/checkout@v4
         with:
-          repository: juliopdx/push-test
+          repository: JulioPDX/push-test
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           fetch-depth: 0
           path: docs
