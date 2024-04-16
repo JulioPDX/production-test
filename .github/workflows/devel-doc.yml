@@ -37,4 +37,5 @@ jobs:
             pip install -r requirements.txt
             git remote add push-test https://juliopdx:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/JulioPDX/push-test.git
             git remote -v
+            git fetch push-test main
             mike deploy --push -r push-test -b main devel
