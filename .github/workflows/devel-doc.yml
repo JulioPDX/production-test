@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout build repo
         uses: actions/checkout@v4
+        with:
+          path: devel
 
       - name: Checkout docs repo
         uses: actions/checkout@v4
@@ -34,8 +36,10 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       - name: 'Build mkdocs content and deploy'
         run: |
+            cd ./devel
             pip install -r requirements.txt
-            git remote add push-test https://juliopdx:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/JulioPDX/push-test.git
-            git remote -v
-            git fetch push-test main
-            mike deploy --push -r push-test -b main devel
+            mkdocs build -d ../docs/devel
+            cd ../docs
+            git add .
+            git commit -m "updating devel with $GITHUB_SHA"
+            git push
