@@ -35,7 +35,7 @@ jobs:
           # Ninja checkout
           git remote add push-test  https://github.com/juliopdx/push-test
           # No clash with branch main
-          git remote fetch main
+          git fetch push-test main
 
       - name: 'Build mkdocs content and deploy'
         run: |
