@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - devel
-  workflow_dispatch:
 
 jobs:
   'devel_doc':
